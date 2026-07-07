@@ -30,8 +30,17 @@ namespace RPGGame
                     zombie.Health = 40;
                     zombie.Damage = 30;
 
-                    zombie.Attack(player); // Zombie attacks the player
+                    while (zombie.Health > 0 && player.Health > 0)
+                    {
+                        player.AttackMonster(zombie); // Player attacks the zombie
+
+                        if (zombie.Health > 0)
+                        {
+                            zombie.Attack(player); // Zombie attacks the player back (if survived)
+                        }
+                    }
                 }
+
                 else if (choice == "2")
                 {
                     Monster vampire = new Monster();
@@ -39,8 +48,18 @@ namespace RPGGame
                     vampire.Health = 30;
                     vampire.Damage = 20;
 
-                    vampire.Attack(player); // Vampire attacks the player
+
+                    while (vampire.Health > 0 && player.Health > 0)
+                    {
+                        player.AttackMonster(vampire); // Player attacks the vampire
+
+                        if (vampire.Health > 0)
+                        {
+                            vampire.Attack(player); // Vampire attacks the player back (if survived)
+                        }
+                    }
                 }
+
                 else if(choice == "3")
                 {
                     break; // Exit the game loop
@@ -58,6 +77,13 @@ namespace RPGGame
             {
                 this.Health = this.Health - damage;
                 Console.WriteLine($"Player: {this.Name} has {this.Health} health left.");
+            }
+
+            public void AttackMonster(Monster target)
+            {
+                Console.WriteLine($"{this.Name} attacks {target.Name}!");
+                target.Health -= 10; // Hero deals 10 damage to the monster
+                Console.WriteLine($"Monster: {target.Name} has {target.Health} health left.");
             }
         }
         
