@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace RPGGame
+{
+
+    class Program
+    {
+        static void Main()
+        {
+            Hero player = new Hero();
+            
+            Console.WriteLine("Enter your hero's name:");
+            String HeroName = Console.ReadLine();
+
+            player.Name = HeroName;
+            player.Health = 100;
+
+            Console.WriteLine($"Player: {player.Name} has {player.Health} health.");
+
+            player.TakeDamage(20);
+
+            Console.WriteLine("Where do you want to go? (1) Dark Forest (2) Deep Cave");
+            String choice = Console.ReadLine();
+            if (choice == "1")
+            {
+                Monster zombie = new Monster();
+                zombie.Name = "Zombie";
+                zombie.Health = 50;
+
+                zombie.Attack(player); // Zombie attacks the player
+            }
+            else if (choice == "2")
+            {
+                Monster vampire = new Monster();
+                vampire.Name = "Vampire";
+                vampire.Health = 30;
+            }
+
+        }
+
+        class Hero
+        {
+            public string Name;
+            public int Health;
+
+            public void TakeDamage(int damage)
+            {
+                this.Health = this.Health - damage;
+                Console.WriteLine($"Player: {this.Name} has {this.Health} health left.");
+            }
+        }
+        
+        class Monster
+        {
+            public string Name;
+            public int Health;
+
+            // Method for the monster to attack the hero (player)
+            public void Attack(Hero target)
+            {
+                Console.WriteLine($"{this.Name} attacks {target.Name}!");
+
+                target.TakeDamage(10); // Monster deals 10 damage to the hero (player)
+            }
+        }
+    }
+}
