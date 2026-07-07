@@ -18,7 +18,6 @@ namespace RPGGame
 
             Console.WriteLine($"Player: {player.Name} has {player.Health} health.");
 
-            player.TakeDamage(20);
 
             Console.WriteLine("Where do you want to go? (1) Dark Forest (2) Deep Cave");
             String choice = Console.ReadLine();
@@ -26,7 +25,8 @@ namespace RPGGame
             {
                 Monster zombie = new Monster();
                 zombie.Name = "Zombie";
-                zombie.Health = 50;
+                zombie.Health = 40;
+                zombie.Damage = 30;
 
                 zombie.Attack(player); // Zombie attacks the player
             }
@@ -35,6 +35,10 @@ namespace RPGGame
                 Monster vampire = new Monster();
                 vampire.Name = "Vampire";
                 vampire.Health = 30;
+                vampire.Damage = 20;
+
+                vampire.Attack(player); // Vampire attacks the player
+                
             }
 
         }
@@ -55,13 +59,14 @@ namespace RPGGame
         {
             public string Name;
             public int Health;
+            public int Damage;
 
             // Method for the monster to attack the hero (player)
             public void Attack(Hero target)
             {
                 Console.WriteLine($"{this.Name} attacks {target.Name}!");
 
-                target.TakeDamage(10); // Monster deals 10 damage to the hero (player)
+                target.TakeDamage(Damage); // Monster deals 10 damage to the hero (player)
             }
         }
     }
