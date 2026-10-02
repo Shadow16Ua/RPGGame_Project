@@ -11,7 +11,7 @@ A minimalist turn-based text RPG running in the terminal.
 
 ## Built With
 
-- C# (.NET)
+- C# (.NET 10)
 - Object-Oriented Programming (OOP)
 - Interactive console game loop
 
